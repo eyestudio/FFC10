@@ -6,40 +6,8 @@
     <title>FF C10 - Redirecting...</title>
     <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon_light.svg">
     <script>
-        // 检测移动设备
-        function isMobileDevice() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/.test(userAgent);
-        }
-        
-        // 基于设备类型和时间的条件跳转
-        function smartRedirect() {
-            // 如果是移动设备，直接跳转到/App
-            if (isMobileDevice()) {
-                window.location.href = '/App';
-                return;
-            }
-            
-            // 桌面设备：基于时间判断
-            // 获取当前东八区时间
-            const now = new Date();
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const chinaTime = new Date(utc + (8 * 3600000)); // 东八区 UTC+8
-            
-            // 设置目标时间：东八区2025年8月14日19:00
-            const targetTime = new Date(2025, 7, 14, 19, 0, 0); // 月份从0开始，7表示8月
-            
-            if (chinaTime < targetTime) {
-                // 2025年8月14日19:00前跳转到stay_tuned.html
-                window.location.href = '/stay_tuned.html';
-            } else {
-                // 2025年8月14日19:00后跳转到/en
-                window.location.href = '/en';
-            }
-        }
-        
-        // 立即执行智能跳转
-        smartRedirect();
+        // 始终跳转到stay_tuned.html
+        window.location.href = '/stay_tuned.html';
     </script>
     <!-- Fallback meta refresh - 默认跳转到stay_tuned.html -->
     <meta http-equiv="refresh" content="2; url=/stay_tuned.html">
@@ -73,8 +41,8 @@
 <body>
     <div class="redirect-message">
         <div class="logo"></div>
-        <p>Redirecting based on time...</p>
-        <p><a href="/stay_tuned.html" style="color: #667eea;">Continue to Stay Tuned</a> | <a href="/en" style="color: #667eea;">Continue to Main Site</a></p>
+        <p>Redirecting to Stay Tuned...</p>
+        <p><a href="/stay_tuned.html" style="color: #667eea;">Continue to Stay Tuned</a></p>
     </div>
 </body>
 </html>
