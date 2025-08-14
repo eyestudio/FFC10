@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FFC10 - Redirecting...</title>
     <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon_light.svg">
-    <meta http-equiv="refresh" content="0; url=/en/">
     <script>
-        // 立即跳转到英文版本
-        window.location.href = '/en/';
+        // User Agent检测和智能跳转
+        function detectDeviceAndRedirect() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // 检测移动设备
+            const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/.test(userAgent);
+            
+            // 检测平板设备
+            const isTablet = /ipad|android(?!.*mobile)|tablet/.test(userAgent);
+            
+            // 移动设备或平板跳转到/App目录
+            if (isMobile || isTablet) {
+                window.location.href = '/App/';
+            } else {
+                // 桌面设备跳转到/en目录
+                window.location.href = '/en/';
+            }
+        }
+        
+        // 立即执行检测和跳转
+        detectDeviceAndRedirect();
     </script>
+    <!-- Fallback meta refresh for desktop devices -->
+    <meta http-equiv="refresh" content="2; url=/en/">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -40,8 +60,8 @@
 <body>
     <div class="redirect-message">
         <div class="logo"></div>
-        <p>Redirecting to English version...</p>
-        <p><a href="/en/" style="color: #667eea;">Click here if not redirected automatically</a></p>
+        <p>Detecting device and redirecting...</p>
+        <p><a href="/en/" style="color: #667eea;">Desktop version</a> | <a href="/App/" style="color: #667eea;">Mobile version</a></p>
     </div>
 </body>
 </html>
