@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Tuned</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            background-color: #000000;
+            background-image: url('assets/images/illustrations/Stay tuned.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .countdown-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .countdown {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        
+        .countdown-label {
+            font-size: 1.2rem;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .countdown {
+                font-size: 2.5rem;
+            }
+            .countdown-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown" id="countdown">00:00:00</div>
+        <div class="countdown-label">倒计时</div>
+    </div>
+    
+    <script>
+        function updateCountdown() {
+            // 目标时间：东八区2025年8月14日19:00
+            const targetDate = new Date('2025-08-14T19:00:00+08:00');
+            const now = new Date();
+            
+            // 计算时间差（毫秒）
+            const timeDiff = targetDate.getTime() - now.getTime();
+            
+            if (timeDiff <= 0) {
+                // 时间到达，跳转到/en目录
+                window.location.href = '/en';
+                return;
+            }
+            
+            // 计算小时、分钟、秒
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            // 格式化显示（补零）
+            const formattedTime = 
+                String(hours).padStart(2, '0') + ':' +
+                String(minutes).padStart(2, '0') + ':' +
+                String(seconds).padStart(2, '0');
+            
+            // 更新显示
+            document.getElementById('countdown').textContent = formattedTime;
+        }
+        
+        // 页面加载时立即更新一次
+        updateCountdown();
+        
+        // 每秒更新一次倒计时
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
